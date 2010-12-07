@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>reddit HD options</title>
+  <meta charset="utf-8" />
+</head>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var $top = document.getElementById("top");
+  var $right = document.getElementById("right");
+  var $bottom = document.getElementById("bottom");
+
+  localStorage["top"] = $top.checked;
+  localStorage["right"] = $right.checked;
+  localStorage["bottom"] = $bottom.checked;
+
+  // Update status to let user know options were saved.
+  var status = document.getElementById("status");
+  status.innerHTML = "Options Saved. Reload reddit to see changes.";
+  setTimeout(function() {
+    status.innerHTML = "";
+  }, 2000);
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  var $top = document.getElementById("top");
+  var $right = document.getElementById("right");
+  var $bottom = document.getElementById("bottom");
+
+  $top.checked = localStorage["top"] == undefined ? true : JSON.parse(localStorage["top"]);
+  $right.checked = localStorage["right"] == undefined ? true : JSON.parse(localStorage["right"]);
+  $bottom.checked = localStorage["bottom"] == undefined ? true : JSON.parse(localStorage["bottom"]);
+
+}
+
+</script>
+
+<body onload="restore_options()">
+
+Reddit parts to hide : <br /><br />
+  <label for="top">Top :</label><input id="top" type="checkbox" /> <br />
+  <label for="right">Right :</label><input id="right" type="checkbox" /> <br />
+  <label for="bottom">Bottom :</label><input id="bottom" type="checkbox" /> <br />
+<br />
+
+<button onclick="save_options()">Save</button>
+<br /> <br />
+<span id="status" style="color: #444; font-weight: bold;"></span>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+  <script>
+    chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+        if (request.method == "options") {
+            sendResponse({
+                top: localStorage['top'] == undefined ? true : JSON.parse(localStorage['top']),
+                right: localStorage['right'] == undefined ? true : JSON.parse(localStorage['right']),
+                bottom: localStorage['bottom'] == undefined ? true : JSON.parse(localStorage['bottom'])
+            });
+        } else {
+            sendResponse({}); // snub them.
+        }
+    });
+  </script>
+</html>
