@@ -1,53 +1,94 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>reddit HD options</title>
-  <meta charset="utf-8" />
-</head>
-<script type="text/javascript">
+  <head>
+    <title>reddit HD options</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      body {
+      text-shadow: 1px 1px 2px #999;
+      font-size: 1.25em;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      }
+      .logo {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      margin: auto
+      }
+      .logo img {
+      margin: 10px;
+      }
+      .options {
+      position: relative;
+      border: 2px solid #222;
+      border-radius: 5px;
+      width: 400px; 
+      margin: auto;
+      padding: 5px;
+      -webkit-box-shadow: 2px 2px 10px #888;
+      }
+      .options .title {
+      padding: 10px;
+      }
+      .options label {
+      padding-left: 30px;
+      }
+      .options .button {
+      display: block;
+      position: relative;
+      margin: 10px auto;
+      width: 100px;
+      }
+    </style>
+  </head>
+  <script type="text/javascript">
 
-// Saves options to localStorage.
-function save_options() {
-  var $top = document.getElementById("top");
-  var $right = document.getElementById("right");
-  var $bottom = document.getElementById("bottom");
+    // Saves options to localStorage.
+    function save_options() {
+    var $top = document.getElementById("top");
+    var $right = document.getElementById("right");
+    var $bottom = document.getElementById("bottom");
 
-  localStorage["top"] = $top.checked;
-  localStorage["right"] = $right.checked;
-  localStorage["bottom"] = $bottom.checked;
+    localStorage["top"] = $top.checked;
+    localStorage["right"] = $right.checked;
+    localStorage["bottom"] = $bottom.checked;
 
-  // Update status to let user know options were saved.
-  var status = document.getElementById("status");
-  status.innerHTML = "Options Saved. Reload reddit to see changes.";
-  setTimeout(function() {
+    // Update status to let user know options were saved.
+    var status = document.getElementById("status");
+    status.innerHTML = "Options Saved. Reload reddit to see changes.";
+    setTimeout(function() {
     status.innerHTML = "";
-  }, 2000);
-}
+    }, 2000);
+    }
 
-// Restores select box state to saved value from localStorage.
-function restore_options() {
-  var $top = document.getElementById("top");
-  var $right = document.getElementById("right");
-  var $bottom = document.getElementById("bottom");
+    // Restores select box state to saved value from localStorage.
+    function restore_options() {
+    var $top = document.getElementById("top");
+    var $right = document.getElementById("right");
+    var $bottom = document.getElementById("bottom");
 
-  $top.checked = localStorage["top"] == undefined ? true : JSON.parse(localStorage["top"]);
-  $right.checked = localStorage["right"] == undefined ? true : JSON.parse(localStorage["right"]);
-  $bottom.checked = localStorage["bottom"] == undefined ? true : JSON.parse(localStorage["bottom"]);
+    $top.checked = localStorage["top"] == undefined ? true : JSON.parse(localStorage["top"]);
+    $right.checked = localStorage["right"] == undefined ? true : JSON.parse(localStorage["right"]);
+    $bottom.checked = localStorage["bottom"] == undefined ? true : JSON.parse(localStorage["bottom"]);
 
-}
+    }
 
-</script>
+  </script>
 
-<body onload="restore_options()">
+  <body onload="restore_options()">
 
-Reddit parts to hide : <br /><br />
-  <label for="top">Top :</label><input id="top" type="checkbox" /> <br />
-  <label for="right">Right :</label><input id="right" type="checkbox" /> <br />
-  <label for="bottom">Bottom :</label><input id="bottom" type="checkbox" /> <br />
-<br />
-
-<button onclick="save_options()">Save</button>
-<br /> <br />
-<span id="status" style="color: #444; font-weight: bold;"></span>
-</body>
+    <div class="logo">
+      <img src="icon128.png" alt="Reddit HD"/>
+    </div>
+    <div class="options">
+      <div class="title">Reddit parts to hide :</div>
+      <label for="top">Top :</label><input id="top" type="checkbox" /> <br />
+      <label for="right">Right :</label><input id="right" type="checkbox" /> <br />
+      <label for="bottom">Bottom :</label><input id="bottom" type="checkbox" /> <br />
+      <button class="button" onclick="save_options()">Save</button>
+    </div>
+    <span id="status" style="color: #444; font-weight: bold;"></span>
+  </body>
 </html>
